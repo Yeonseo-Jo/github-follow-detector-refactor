@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import ReactQueryProvider from "../components/common/ReactQueryProvider";
-import "../styles/common/global.css";
 
-const inter = Inter({ subsets: ["latin"] });
+import Layout from "@/components/Layout";
+import "../styles/globalStyle.css";
 
 export const metadata: Metadata = {
   title: "github 맞팔 탐지기",
@@ -17,9 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={inter.className}>
-        <ReactQueryProvider>{children}</ReactQueryProvider>
-      </body>
+      <Layout>{children}</Layout>
     </html>
   );
 }

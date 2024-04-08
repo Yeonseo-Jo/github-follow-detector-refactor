@@ -1,5 +1,5 @@
 import { globalFontFace, globalStyle } from "@vanilla-extract/css";
-import { reset } from "./reset.css";
+import { reset } from "./resetStyle.css";
 
 export const GlobalStyle = [
   ...reset,
