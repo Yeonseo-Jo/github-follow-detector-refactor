@@ -1,3 +1,4 @@
+import TokenInputContainer from "@/components/home/TokenInputContainer.tsx";
 import Link from "next/link";
 import * as styles from "../../styles/home/HomeContainerStyle.css.ts";
 
@@ -16,16 +17,7 @@ const HomePage = () => {
             ﹒ 토큰 발급 시 권한 user(Update ALL user data)를 체크해주세요!
           </p>
         </div>
-        <div className={styles.TokenInputBox}>
-          <input
-            type="text"
-            placeholder="Github Token을 입력해주세요"
-            className={styles.TokenInput}
-          />
-          <button type="button" className={styles.TokenInputNextBtn}>
-            나의 맞팔 확인하기
-          </button>
-        </div>
+        <TokenInputContainer />
       </article>
     </section>
   );
