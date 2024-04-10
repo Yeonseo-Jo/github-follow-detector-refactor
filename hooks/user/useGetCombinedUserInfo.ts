@@ -1,13 +1,20 @@
 import { getUserFollowInfo } from "@/apis/user/getUserFollowInfo";
 import { getUserProfileInfo } from "@/apis/user/getUserProfileInfo";
+import { QUERY_KEYS } from "@/constants/common/QUERY_KEYS";
 import { UserProfileInfoTypes, UserTypes } from "@/types/user/UserTypes";
 import { useQueries } from "@tanstack/react-query";
 
 export const useGetCombinedUserInfo = () => {
   return useQueries({
     queries: [
-      { queryKey: ["userProfileInfo"], queryFn: () => getUserProfileInfo() },
-      { queryKey: ["userFollowInfo"], queryFn: () => getUserFollowInfo() },
+      {
+        queryKey: QUERY_KEYS.user.profileInfo,
+        queryFn: () => getUserProfileInfo(),
+      },
+      {
+        queryKey: QUERY_KEYS.user.followInfo,
+        queryFn: () => getUserFollowInfo(),
+      },
     ],
     combine: (results) => {
       return {

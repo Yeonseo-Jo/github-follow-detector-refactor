@@ -11,8 +11,6 @@ const FollowListPage = () => {
   const userProfileData = data[0];
   const followData = data[1];
 
-  console.log(isLoading, error, data);
-
   return (
     <section className={styles.FollowListPageWrapper}>
       {isLoading && <div>로딩중..</div>}
