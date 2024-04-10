@@ -12,27 +12,29 @@ const UserProfile = ({
 
   return (
     <article className={styles.UserProfileWrapper}>
-      {login}
       {avatar_url && (
         <Image
           src={avatar_url}
-          width={200}
-          height={200}
+          width={100}
+          height={100}
           alt="유저-프로필-이미지"
           priority
         />
       )}
 
-      {bio}
-      <div className={styles.CurrentFollowInfo}>
-        <p>
-          <span>팔로워 : </span>
-          <span>{followers}</span>
-        </p>
-        <p>
-          <span>팔로잉 : </span>
-          <span>{following}</span>
-        </p>
+      <div className={styles.UserInfoContainer}>
+        <h2 className={styles.UserNameTxt}>{login}</h2>
+        <p className={styles.UserBioTxt}>{bio}</p>
+        <div className={styles.CurrentFollowContainer}>
+          <p className={styles.FollowTxt}>
+            ﹒ <span className={styles.FollowCntTxt}>{followers}</span>{" "}
+            followers
+          </p>
+          <p className={styles.FollowTxt}>
+            ﹒ <span className={styles.FollowCntTxt}>{following}</span>{" "}
+            following
+          </p>
+        </div>
       </div>
     </article>
   );
