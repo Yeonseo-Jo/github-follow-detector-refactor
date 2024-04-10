@@ -17,7 +17,15 @@ const FollowListPage = () => {
     <section className={styles.FollowListPageWrapper}>
       {isLoading && <div>로딩중..</div>}
       {error && <div>에러 발생!</div>}
-      {!isLoading && !error && <UserProfile userProfile={userProfileData} />}
+      {!isLoading && !error && (
+        <UserProfile
+          userProfile={userProfileData}
+          followCnt={{
+            following: followData.followingData.length,
+            followers: followData.followersData.length,
+          }}
+        />
+      )}
       {followData && <FollowList followData={followData} />}
     </section>
   );

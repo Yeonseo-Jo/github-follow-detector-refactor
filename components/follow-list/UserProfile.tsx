@@ -3,12 +3,15 @@ import Image from "next/image";
 import { UserProfileInfoTypes } from "@/types/user/UserTypes";
 import * as styles from "../../styles/follow-list/UserProfileStyle.css";
 
-const UserProfile = ({
-  userProfile,
-}: {
+interface UserProfileProps {
   userProfile: UserProfileInfoTypes;
-}) => {
-  const { login, avatar_url, bio, followers, following } = userProfile;
+  followCnt: { following: number; followers: number };
+}
+
+const UserProfile = ({ userProfile, followCnt }: UserProfileProps) => {
+  const { login, avatar_url, bio } = userProfile;
+
+  const { following, followers } = followCnt;
 
   return (
     <article className={styles.UserProfileWrapper}>
