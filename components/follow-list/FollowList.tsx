@@ -1,9 +1,8 @@
-import { useUpdateFollow } from "@/hooks/follow/useUpdateFollow";
-import { useUpdateUnfollow } from "@/hooks/follow/useUpdateUnfollow";
+import { LIST_TYPE } from "@/constants/follow-list/LIST_TYPE";
 import { UserFollowInfoDataTypes } from "@/types/user/UserTypes";
-import Image from "next/image";
-import React from "react";
+import { useMemo } from "react";
 import * as styles from "../../styles/follow-list/FollowListStyle.css";
+import FollowListDetailWrapper from "./FollowListDetailWrapper";
 
 const FollowList = ({
   followData,
@@ -12,84 +11,38 @@ const FollowList = ({
 }) => {
   const { followingData, followersData } = followData;
 
-  const updateUnfollow = useUpdateUnfollow();
-  const updateFollow = useUpdateFollow();
+  const getIsMatchInfo = useMemo(() => {
+    // 맞팔 중인 사람들 리스트
+    const matchedList = followersData.filter((follower) => {
+      return followingData.some(
+        (following) => following.login === follower.login
+      );
+    });
 
-  // 맞팔 중인 사람들 리스트
-  const matchedList = followersData.filter((follower) => {
-    return followingData.some(
-      (following) => following.login === follower.login
-    );
-  });
+    // 나를 팔로우 한 사람들 중 내가 팔로우 하지 않은 사람들 리스트
+    const unMatchedList = followersData.filter((follower) => {
+      return !matchedList.includes(follower);
+    });
 
-  // 나를 팔로우 한 사람들 중 내가 팔로우 하지 않은 사람들 리스트
-  const unMatchedList = followersData.filter((follower) => {
-    return !matchedList.includes(follower);
-  });
+    return [
+      { type: LIST_TYPE.unMatched, list: unMatchedList },
+      { type: LIST_TYPE.matched, list: matchedList },
+    ];
+  }, [followersData, followingData]);
+
+  const matchListData = getIsMatchInfo;
 
   return (
     <article className={styles.FollowListWrapper}>
-      <div className={styles.ListDetailWrapper}>
-        <p className={styles.ListTitle}>맞팔 아닌 사람</p>
-        <div className={styles.ListUserontainer}>
-          {unMatchedList.map(({ login, bio, avatar_url }) => {
-            return (
-              <div key={login} className={styles.ListUserCard}>
-                {avatar_url && (
-                  <Image
-                    src={avatar_url}
-                    width={80}
-                    height={80}
-                    alt="unMatched-user-img"
-                  />
-                )}
-                <p className={styles.LoginId}>{login}</p>
-                <p>{bio}</p>
-                <button
-                  id={login}
-                  className={styles.FollowUnFollowBtn}
-                  onClick={(e: React.MouseEvent) => {
-                    updateFollow(e.currentTarget.id);
-                  }}
-                >
-                  팔로우
-                </button>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-
-      <div className={styles.ListDetailWrapper}>
-        <p className={styles.ListTitle}>맞팔 중인 사람</p>
-        <div className={styles.ListUserontainer}>
-          {matchedList.map(({ login, bio, avatar_url }) => {
-            return (
-              <div key={login} className={styles.ListUserCard}>
-                {avatar_url && (
-                  <Image
-                    src={avatar_url}
-                    width={80}
-                    height={80}
-                    alt="matched-user-img"
-                  />
-                )}
-                <p className={styles.LoginId}>{login}</p>
-                <p>{bio}</p>
-                <button
-                  id={login}
-                  className={styles.FollowUnFollowBtn}
-                  onClick={(e: React.MouseEvent) => {
-                    updateUnfollow(e.currentTarget.id);
-                  }}
-                >
-                  언팔로우
-                </button>
-              </div>
-            );
-          })}
-        </div>
-      </div>
+      {matchListData.map(({ type, list }) => {
+        return (
+          <FollowListDetailWrapper
+            key={type}
+            listType={type}
+            targetMatchList={list}
+          />
+        );
+      })}
     </article>
   );
 };

@@ -32,10 +32,6 @@ export const ListUserontainer = style({
   scrollbarColor: "#30363d #161b22",
 });
 
-export const LoginId = style({
-  fontSize: "1.5rem",
-});
-
 export const ListTitle = style({
   width: "60%",
   alignSelf: "center",
@@ -45,17 +41,4 @@ export const ListTitle = style({
 
   backgroundColor: "#238636",
   color: "white",
-});
-
-export const ListUserCard = style({
-  padding: "0.5rem 1.3rem",
-});
-
-export const FollowUnFollowBtn = style({
-  padding: "0.7rem 1rem",
-  marginTop: "0.3rem",
-  borderRadius: "10px",
-
-  backgroundColor: "#30363d",
-  color: "#4493f8",
 });
