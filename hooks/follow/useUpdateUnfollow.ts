@@ -1,20 +1,11 @@
 import { deleteFollower } from "@/apis/follow/deleteFollower";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useGetMutate } from "../common/useGetMutate";
 
 export const useUpdateUnfollow = () => {
-  const queryClient = useQueryClient();
+  const queryKey = ["userFollowInfo"];
+  const mutationFn = (username: string) => {
+    return deleteFollower(username);
+  };
 
-  const mutation = useMutation({
-    mutationFn: (username: string) => {
-      return deleteFollower(username);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["userFollowInfo"],
-        exact: true,
-      });
-    },
-  });
-
-  return mutation.mutate;
+  return useGetMutate(queryKey, mutationFn, { exact: true });
 };

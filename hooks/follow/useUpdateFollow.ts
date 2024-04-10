@@ -1,20 +1,11 @@
 import { putFollower } from "@/apis/follow/putFollower";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useGetMutate } from "../common/useGetMutate";
 
 export const useUpdateFollow = () => {
-  const queryClient = useQueryClient();
+  const queryKey = ["userFollowInfo"];
+  const mutationFn = (username: string) => {
+    return putFollower(username);
+  };
 
-  const mutation = useMutation({
-    mutationFn: (username: string) => {
-      return putFollower(username);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["userFollowInfo"],
-        exact: true,
-      });
-    },
-  });
-
-  return mutation.mutate;
+  return useGetMutate(queryKey, mutationFn, { exact: true });
 };
