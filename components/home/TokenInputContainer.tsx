@@ -1,6 +1,7 @@
 "use client";
 
 import { setInstanceToken } from "@/apis";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import * as styles from "../../styles/home/TokenInputContainerStyle.css";
@@ -17,8 +18,6 @@ const TokenInputContainer = () => {
   const handleClickConfirmFollowBtn = () => {
     if (!token) return;
     setInstanceToken(token);
-
-    router.push("/follow-list");
   };
 
   return (
@@ -29,13 +28,15 @@ const TokenInputContainer = () => {
         className={styles.TokenInput}
         onChange={handleOnChangeTokenInput}
       />
-      <button
-        type="button"
-        className={styles.TokenInputNextBtn}
-        onClick={handleClickConfirmFollowBtn}
-      >
-        나의 맞팔 확인하기
-      </button>
+      <Link href={"/follow-list"}>
+        <button
+          type="button"
+          className={styles.TokenInputNextBtn}
+          onClick={handleClickConfirmFollowBtn}
+        >
+          나의 맞팔 확인하기
+        </button>
+      </Link>
     </div>
   );
 };
