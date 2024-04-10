@@ -1,5 +1,8 @@
+import { useUpdateFollow } from "@/hooks/follow/useUpdateFollow";
+import { useUpdateUnfollow } from "@/hooks/follow/useUpdateUnfollow";
 import { UserFollowInfoDataTypes } from "@/types/user/UserTypes";
 import Image from "next/image";
+import React from "react";
 import * as styles from "../../styles/follow-list/FollowListStyle.css";
 
 const FollowList = ({
@@ -8,6 +11,9 @@ const FollowList = ({
   followData: UserFollowInfoDataTypes;
 }) => {
   const { followingData, followersData } = followData;
+
+  const updateUnfollow = useUpdateUnfollow();
+  const updateFollow = useUpdateFollow();
 
   // 맞팔 중인 사람들 리스트
   const matchedList = followersData.filter((follower) => {
@@ -39,7 +45,13 @@ const FollowList = ({
                 )}
                 <p className={styles.LoginId}>{login}</p>
                 <p>{bio}</p>
-                <button id={login} className={styles.FollowUnFollowBtn}>
+                <button
+                  id={login}
+                  className={styles.FollowUnFollowBtn}
+                  onClick={(e: React.MouseEvent) => {
+                    updateFollow(e.currentTarget.id);
+                  }}
+                >
                   팔로우
                 </button>
               </div>
@@ -64,7 +76,13 @@ const FollowList = ({
                 )}
                 <p className={styles.LoginId}>{login}</p>
                 <p>{bio}</p>
-                <button id={login} className={styles.FollowUnFollowBtn}>
+                <button
+                  id={login}
+                  className={styles.FollowUnFollowBtn}
+                  onClick={(e: React.MouseEvent) => {
+                    updateUnfollow(e.currentTarget.id);
+                  }}
+                >
                   언팔로우
                 </button>
               </div>
