@@ -10,11 +10,17 @@ import { getSessionStorageHandler } from "@/utils/getSessionStorageHandler";
 import * as styles from "../../styles/follow-list/FollowListPageContainerStyle.css";
 
 const FollowListPage = () => {
-  const token: string | null = getSessionStorageHandler().getItem("token");
-  const isHasToken = getSessionStorageHandler().hasItem("token");
+  const token: string | null =
+    typeof window !== "undefined"
+      ? getSessionStorageHandler().getItem("token")
+      : null;
+  const isHasToken =
+    typeof window !== "undefined"
+      ? getSessionStorageHandler().hasItem("token")
+      : false;
   const { isLoading, error, data } = useGetCombinedUserInfo();
 
-  if (!isHasToken || !token) return <div>에러 발생!</div>;
+  if (!isHasToken || !token) return <Error />;
   setInstanceToken(token);
 
   const userProfileData = data[0];
