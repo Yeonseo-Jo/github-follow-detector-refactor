@@ -1,6 +1,7 @@
 "use client";
 
 import { setInstanceToken } from "@/apis";
+import Error from "@/components/common/Error";
 import FollowList from "@/components/follow-list/FollowList";
 import UserProfile from "@/components/follow-list/UserProfile";
 import FollowListSkeleton from "@/components/follow-list/skeletonUi/FollowListSkeleton";
@@ -22,7 +23,7 @@ const FollowListPage = () => {
   return (
     <section className={styles.FollowListPageWrapper}>
       {isLoading && <FollowListSkeleton />}
-      {error && <div>에러 발생!</div>}
+      {error && <Error />}
       {!isLoading && !error && (
         <UserProfile
           userProfile={userProfileData}
@@ -32,7 +33,7 @@ const FollowListPage = () => {
           }}
         />
       )}
-      {followData && <FollowList followData={followData} />}
+      {!isLoading && !error && <FollowList followData={followData} />}
     </section>
   );
 };
