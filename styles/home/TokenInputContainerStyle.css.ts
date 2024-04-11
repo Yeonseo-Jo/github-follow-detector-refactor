@@ -30,14 +30,23 @@ export const TokenInput = style({
   },
 });
 
-export const TokenInputNextBtn = style({
+export const TokenInputNextBtnBase = style({
   width: "100%",
   height: "4.5rem",
 
-  backgroundColor: "#238636",
   color: "#C9D1D9",
 
   borderRadius: "10px",
 
   fontSize: "1.7rem",
 });
+
+export const ActiveTokenInputNextBtn = style([
+  TokenInputNextBtnBase,
+  { backgroundColor: "#238636" },
+]);
+
+export const InActiveTokenInputNextBtn = style([
+  TokenInputNextBtnBase,
+  { backgroundColor: "#292e36" },
+]);

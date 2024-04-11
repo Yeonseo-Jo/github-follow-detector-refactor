@@ -33,7 +33,11 @@ const TokenInputContainer = () => {
       <Link href={"/follow-list"}>
         <button
           type="button"
-          className={styles.TokenInputNextBtn}
+          className={
+            token
+              ? styles.ActiveTokenInputNextBtn
+              : styles.InActiveTokenInputNextBtn
+          }
           onClick={handleClickConfirmFollowBtn}
         >
           나의 맞팔 확인하기
