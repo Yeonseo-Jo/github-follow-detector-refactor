@@ -1,23 +1,25 @@
 "use client";
 
-import { setInstanceToken } from "@/apis";
+import { getSessionStorageHandler } from "@/utils/getSessionStorageHandler";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import React, { useState } from "react";
 import * as styles from "../../styles/home/TokenInputContainerStyle.css";
 
 const TokenInputContainer = () => {
-  const router = useRouter();
-
   const [token, setToken] = useState("");
 
   const handleOnChangeTokenInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setToken(e.target.value);
   };
 
-  const handleClickConfirmFollowBtn = () => {
-    if (!token) return;
-    setInstanceToken(token);
+  const handleClickConfirmFollowBtn = (
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    if (!token) e.preventDefault();
+
+    getSessionStorageHandler().setItem("token", token);
+
+    if (!getSessionStorageHandler().hasItem("token")) e.preventDefault();
   };
 
   return (

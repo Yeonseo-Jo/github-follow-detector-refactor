@@ -1,12 +1,19 @@
 "use client";
 
+import { setInstanceToken } from "@/apis";
 import FollowList from "@/components/follow-list/FollowList";
 import UserProfile from "@/components/follow-list/UserProfile";
 import { useGetCombinedUserInfo } from "@/hooks/user/useGetCombinedUserInfo";
+import { getSessionStorageHandler } from "@/utils/getSessionStorageHandler";
 import * as styles from "../../styles/follow-list/FollowListPageContainerStyle.css";
 
 const FollowListPage = () => {
+  const token: string | null = getSessionStorageHandler().getItem("token");
+  const isHasToken = getSessionStorageHandler().hasItem("token");
   const { isLoading, error, data } = useGetCombinedUserInfo();
+
+  if (!isHasToken || !token) return <div>에러 발생!</div>;
+  setInstanceToken(token);
 
   const userProfileData = data[0];
   const followData = data[1];

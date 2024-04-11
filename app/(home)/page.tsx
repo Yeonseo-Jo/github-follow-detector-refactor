@@ -10,6 +10,7 @@ const HomePage = () => {
           <Link
             href={"https://github.com/settings/tokens"}
             className={styles.TokenLinkBtn}
+            target="_blank"
           >
             Github Token 만들러 가기
           </Link>
