@@ -36,7 +36,7 @@ export const TokenLinkBtn = style({
   width: "fit-content",
   padding: "1rem",
 
-  backgroundColor: "#21262D",
+  backgroundColor: "#292e36",
   color: "#C9D1D9",
 
   borderRadius: "10px",
@@ -46,7 +46,9 @@ export const TokenLinkBtn = style({
   textDecoration: "none",
 
   ":hover": {
-    backgroundColor: "#292e36",
+    backgroundColor: "#4493f8",
+    color: "#30363d",
+    border: "1px solid #30363d",
   },
 });
 
