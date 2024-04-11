@@ -3,6 +3,7 @@
 import { setInstanceToken } from "@/apis";
 import FollowList from "@/components/follow-list/FollowList";
 import UserProfile from "@/components/follow-list/UserProfile";
+import FollowListSkeleton from "@/components/follow-list/skeletonUi/FollowListSkeleton";
 import { useGetCombinedUserInfo } from "@/hooks/user/useGetCombinedUserInfo";
 import { getSessionStorageHandler } from "@/utils/getSessionStorageHandler";
 import * as styles from "../../styles/follow-list/FollowListPageContainerStyle.css";
@@ -20,7 +21,7 @@ const FollowListPage = () => {
 
   return (
     <section className={styles.FollowListPageWrapper}>
-      {isLoading && <div>로딩중..</div>}
+      {isLoading && <FollowListSkeleton />}
       {error && <div>에러 발생!</div>}
       {!isLoading && !error && (
         <UserProfile

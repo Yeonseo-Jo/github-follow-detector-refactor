@@ -5,7 +5,7 @@ export const UserProfileWrapper = style({
   justifyContent: "center",
   alignSelf: "center",
 
-  width: "fit-content",
+  width: "40rem",
   height: "25%",
   padding: "3rem 7rem",
 
