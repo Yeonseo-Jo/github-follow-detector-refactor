@@ -34,6 +34,7 @@ const ListUserCard = ({ listType, targetUserInfo }: ListUserCardProps) => {
       <p className={styles.LoginId}>{login}</p>
       <p>{bio}</p>
       <button
+        type="button"
         id={login}
         className={styles.FollowUnFollowBtn}
         onClick={(e: React.MouseEvent) => {

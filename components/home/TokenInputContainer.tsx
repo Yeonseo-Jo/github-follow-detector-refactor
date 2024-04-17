@@ -12,14 +12,8 @@ const TokenInputContainer = () => {
     setToken(e.target.value);
   };
 
-  const handleClickConfirmFollowBtn = (
-    e: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    if (!token) e.preventDefault();
-
+  const handleClickConfirmFollowBtn = () => {
     getSessionStorageHandler().setItem("token", token);
-
-    if (!getSessionStorageHandler().hasItem("token")) e.preventDefault();
   };
 
   return (
@@ -39,6 +33,7 @@ const TokenInputContainer = () => {
               : styles.InActiveTokenInputNextBtn
           }
           onClick={handleClickConfirmFollowBtn}
+          disabled={!token}
         >
           나의 맞팔 확인하기
         </button>
