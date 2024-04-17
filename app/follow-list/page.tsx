@@ -15,9 +15,9 @@ const FollowListPage = () => {
       ? getSessionStorageHandler().getItem("token")
       : null;
   const isHasToken =
-    typeof window !== "undefined"
-      ? getSessionStorageHandler().hasItem("token")
-      : false;
+    typeof window !== "undefined" &&
+    getSessionStorageHandler().hasItem("token");
+
   const { isLoading, error, data } = useGetCombinedUserInfo();
 
   if (!isHasToken || !token) return <Error />;
